@@ -9,9 +9,9 @@ This project includes the following resources:
 - `/src/main/asciidoc`: A directory structure for your documentation source files.
 - `index.adoc`: The Asciidoc file that becomes `index.html` for the single-file HTML output. You need to modify this file to include the chapters in your reference guide, and you probably want to create some variables that you can use in your document files.
 - `index-multi-adoc`: The Asciidoc file that becomes `index.html` for the multi-file HTML output.You need to modify this file to link to the chapters in your reference guide, and you probably want to create some variables that you can use in your document files.
-- `overview.adoc` - A starter Overview chapter that you can customize to suit your project.
-- `writing-advice.adoc` - A stand-alone file that contains some basic advice for writing a reference guide. You can delete it once you have written a draft of your reference guide.
-- `getting-started.adoc` - A starter Getting Started chapter that you can customize to suit your project.
+- `overview.adoc`: A starter Overview chapter that you can customize to suit your project.
+- `writing-advice.adoc`: A stand-alone file that contains some basic advice for writing a reference guide. You can delete it once you have written a draft of your reference guide.
+- `getting-started.adoc`: A starter Getting Started chapter that you can customize to suit your project.
 - `docinfo.html`: Contains style coding for the collapsible table of contents that is implemented by Tocbot. You should not need to modify this file
 - `docinfo-footer.html`: Contains JavaScript that makes the collapsible table of contents work - by using the Tocbot libary. You should not need to modify this file.
 - `stylesheets`: A directory that contains the custom stylesheet used by Spring reference guides.
