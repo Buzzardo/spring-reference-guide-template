@@ -1,0 +1,25 @@
+[[overview]]
+== Overview
+
+There are a number of ways to proceed. Consult other Spring projects for ideas.
+
+At a minimum, provide a brief description of your project, including what it does and what
+benefits it offers the developers who use it. You should also include how to find help,
+including Stack Overflow, Gitter (if appropriate), email, and even Twitter (if
+appropriate). You should also include a link to the project's issue list on Github.
+
+
+
+=== Headings
+
+This chapter can have multiple headings. The introduction probably does not need one.
+Where to get more info, where to get help, and where to file issues probably do need
+headings.
+
+
+
+[[overview-what-to-read-next]]
+=== What to Read Next
+You may want to add a "`What to Read Next`" heading if your product is sufficiently
+complex that reading straight through the reference guide does not suit some
+readers.

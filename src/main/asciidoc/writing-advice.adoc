@@ -1,0 +1,116 @@
+// This file has some of the same attributes as the index file, because it is meant to be
+// a stand-alone file rather than part of a book.
+
+// To build this document such that you get Spring's styles and admonition icons, use the
+// following command: asciidoctor -a stylesheet=stylesheets/spring.css writing-advice.adoc
+
+:source-highlighter: prettify
+:icons: font
+
+= Tips about Writing and Formatting with Asciidoc
+
+This chapter offers some advice on writing about software and some tips for
+using Asciidoc to make attractive documents.
+
+* <<tips-on-writing>>
+* <<asciidoc-formatting-tips>>
+
+
+
+[[tips-on-writing]]
+== Tips on Writing
+
+See the https://github.com/Buzzardo/spring-style-guide[Spring Style Guide] for more
+detail, but here are some starters:
+
+* Always think of the reader. We need to help them find answers to their questions and
+learn more about the software we offer.
+* Add lots of code samples. In the code samples, have comments that offer additional
+explanation.
+* Link whenever possible, both within this project's docs and across the Spring portfolio.
+Links to other sources are good, too. We want to enable discoverability by letting our
+readers "`surf`" through the content that interests them.
+* Always have leader paragraphs above headings (not including chapter titles), lists,
+tables, and images. Never fail to introduce content.
+* Under each heading, include a list of the child headings within that section. Each of
+those list items should be a link. That lets readers know what is coming and can let them
+more quickly find the content they need. (It is part of a technique called Information
+Mapping, which is meant to aid both understanding and finding content.)
+
+
+
+[[asciidoc-formatting-tips]]
+== Asciidoc Formatting Tips
+
+* To get "`curly`" quotation marks, use regular quotation marks with backtick characters
+inside the regular quotation marks.
++
+NOTE: Ordinary quotation marks should never be used outside of code blocks. They should be
+curly quotation marks or inline code.
+* Mark inline code (such as `String myString;`) by putting it in backticks. You can
+highlight a single line of code by starting and ending the line with single backtick
+characters as well. However, you do not get code highlighting when you do so. That is fine
+for properties and command-line content. Anything that can benefit from syntax
+highlighting (Java, XML, etc.) should be in a code block that is identified accordingly.
++
+The following sample shows a code line with no formatting:
++
+`my-property=true`
++
+The following example shows a line of Java code with syntax highlighting:
+[source,java]
+String favoriteDay = "Friday";
++
+The following example shows an XML element with syntax highlighting:
+[source,xml]
+<favorite_day>Friday</favorite_day>
+* Use the Asciidoc line continuation character (`+`) to add additional content that should
+stay within the same list item. Doing so sets the indentation to the right level. This
+list has a number of examples (the note and the code listings).
+* Avoid inline highlighting, such as bold or italic. Highlighting makes the reader's eye
+jump to that location before it would otherwise, which breaks the flow of reading and
+slows reading. Rather, if something is important, put it in an admonition. See
+<<admonitions>>.
+
+
+
+=== `code` within Headings
+
+If you put a bit of code (often a key word) in a heading, format it as code. The rendering
+engine picks it up both within the document and within the table of contents. That helps
+readers understand that the section deals with that code key word.
+
+
+
+[[admonitions]]
+=== Admonitions
+
+Most documentation production systems, including Asciidoc, recognize five kinds of
+admonitions:
+
+* *Note*: Use a note admonition to call out a relevant detail.
+* *Important*: Use an important admonition to call out something more important than an
+ordinary note (when to use a note admonition or an important admonition is a judgment
+call).
+* *Tip*: Use a tip admonition to offer advice. If a particular technique can save time or
+avoid a problem, that makes a great tip.
+* *Caution*: Use a caution admonition when doing something can cause serious problems. You
+can think of it as "`You will hate yourself for doing this`".
+* *Warning*: Use a warning admonition for actions that can cause bodily harm or death.
+Strictly speaking, software documentation has no use for warnings. However, it is normal
+to use a warning for one software issue: data loss. If an action can cause permanent data
+loss, you can use a warning admonition to let readers know to not do that action.
+
+The remainder of this section offers samples of the five admonitions, to show how they
+are formatted:
+
+NOTE: Put something good to know here.
+
+IMPORTANT: Put a crucial detail here.
+
+TIP: Put a time-saver or good technique here.
+
+CAUTION: Put something the reader should not do here.
+
+WARNING: Put something that can harm the reader or others here. (This can include data
+loss.)

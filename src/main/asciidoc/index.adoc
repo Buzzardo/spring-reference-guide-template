@@ -1,0 +1,18 @@
+= Spring {Your Product} Reference Guide
+
+Author list here (semicolon-separated - the semicolons render as nice separators)
+
+:doctype: book
+:docinfo: shared
+:toc: left
+:toclevels: 4
+:source-highlighter: prettify
+:icons: font
+:sectnums:
+// Remove :sectnums: if you do not want numbered sections (1.1.1, for example)
+// Other Asciidoc variables (often paths to sample code and Github repositories)
+
+// Put include statements here - use this area to add all your chapters
+include::overview.adoc[]
+include::getting-started.adoc[]
+// And so on

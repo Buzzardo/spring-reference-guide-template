@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		<groupId>org.springframework.docTemplate</groupId>
+		<artifactId>spring-doc-template</artifactId>
+		<version>0.1</version>
+		<name>Spring Doc Template</name>
+		<description>Spring Doc Template</description>
+<!-- Your documentation probably has a parent project. If so, uncomment the following
+     block and change the values to match your parent project. -->
+<!--	<parent>
+		<groupId>org.springframework.your-project</groupId>
+		<artifactId>spring-your-project-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../spring-your-project-parent</relativePath>
+	</parent> -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <asciidoctor.maven.plugin.version>1.5.6</asciidoctor.maven.plugin.version>
+		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
+		<asciidoctorj.epub.version>1.5.0-alpha.7</asciidoctorj.epub.version>
+    <asciidoctorj.version>1.5.6</asciidoctorj.version>
+    <jruby.version>1.7.26</jruby.version>
+	</properties>
+	<profiles>
+		<profile>
+			<id>full</id>
+			<activation>
+				<property>
+					<name>full</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctor-maven-plugin</artifactId>
+							<version>${asciidoctor.maven.plugin.version}</version>
+							<dependencies>
+									<!-- Comment this section to use the default jruby artifact provided by the plugin -->
+									<dependency>
+											<groupId>org.jruby</groupId>
+											<artifactId>jruby-complete</artifactId>
+											<version>${jruby.version}</version>
+									</dependency>
+									<!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+									<dependency>
+											<groupId>org.asciidoctor</groupId>
+											<artifactId>asciidoctorj</artifactId>
+											<version>${asciidoctorj.version}</version>
+									</dependency>
+									<dependency>
+										<groupId>org.asciidoctor</groupId>
+										<artifactId>asciidoctorj-pdf</artifactId>
+										<version>${asciidoctorj.pdf.version}</version>
+									</dependency>
+									<dependency>
+										<groupId>org.asciidoctor</groupId>
+										<artifactId>asciidoctorj-epub3</artifactId>
+										<version>${asciidoctorj.epub.version}</version>
+									</dependency>
+							</dependencies>
+							<configuration>
+								<sourceDirectory>./src/main/asciidoc</sourceDirectory>
+							</configuration>
+							<executions>
+									<execution>
+											<id>asciidoc-to-html</id>
+											<phase>generate-resources</phase>
+											<goals>
+													<goal>process-asciidoc</goal>
+											</goals>
+											<configuration>
+												<backend>html5</backend>
+												<sourceHighlighter>coderay</sourceHighlighter>
+												<attributes>
+													<linkcss>true</linkcss>
+													<imagesdir>./images</imagesdir>
+													<toc>left</toc>
+													<icons>font</icons>
+													<sectanchors>true</sectanchors>
+													<!-- set the idprefix to blank -->
+													<idprefix/>
+													<idseparator>-</idseparator>
+													<docinfo1>true</docinfo1>
+													<stylesdir>stylesheets/</stylesdir>
+													<stylesheet>spring.css</stylesheet>
+												</attributes>
+											</configuration>
+									</execution>
+									<execution>
+										<id>generate-pdf-doc</id>
+										<phase>generate-resources</phase>
+										<goals>
+											<goal>process-asciidoc</goal>
+										</goals>
+										<configuration>
+											<backend>pdf</backend>
+											<sourceHighlighter>coderay</sourceHighlighter>
+											<attributes>
+												<icons>font</icons>
+												<pagenums/>
+												<toc/>
+												<idprefix/>
+												<idseparator>-</idseparator>
+											</attributes>
+										</configuration>
+									</execution>
+									<execution>
+										<id>generate-spine-epub</id>
+										<phase>generate-resources</phase>
+										<goals>
+											<goal>process-asciidoc</goal>
+										</goals>
+										<configuration>
+											<backend>epub3</backend>
+											<sourceHighlighter>coderay</sourceHighlighter>
+											<sourceDocumentName>index.adoc</sourceDocumentName>
+										</configuration>
+									</execution>
+							</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>ant-contrib</groupId>
+								<artifactId>ant-contrib</artifactId>
+								<version>1.0b3</version>
+								<exclusions>
+									<exclusion>
+										<groupId>ant</groupId>
+										<artifactId>ant</artifactId>
+									</exclusion>
+								</exclusions>
+							</dependency>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-nodeps</artifactId>
+								<version>1.8.1</version>
+							</dependency>
+							<dependency>
+								<groupId>org.tigris.antelope</groupId>
+								<artifactId>antelopetasks</artifactId>
+								<version>3.2.10</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copy-docs</id>
+								<phase>prepare-package</phase>
+								<configuration>
+									<tasks>
+										<echo>REALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLY LONG LINE I MIGHT BE ABLE TO FIND</echo>
+										<!-- Copy the PDF file -->
+										<copy file="${project.build.directory}/generated-docs/index.pdf" tofile="${project.build.directory}/contents/reference/pdf/spring-your-project-reference.pdf" />
+										<!-- Copy the Epub file -->
+										<copy file="${project.build.directory}/generated-docs/index.epub" tofile="${project.build.directory}/contents/reference/epub/spring-your-project-reference.epub" />
+										<!-- Copy the HTML that uses a single file -->
+										<copy file="${project.build.directory}/generated-docs/index.html" tofile="${project.build.directory}/contents/reference/htmlsingle/index.html" />
+										<copy file="${project.build.directory}/generated-docs/stylesheets/spring.css" tofile="${project.build.directory}/contents/reference/htmlsingle/stylesheets/spring.css" />
+										<copy todir="${project.build.directory}/contents/reference/htmlsingle/tocbot-3.0.2" overwrite="true" flatten="true">
+											<fileset dir="${project.build.directory}/generated-docs/tocbot-3.0.2" includes="*.*" >
+												<include name="*.*" />
+											</fileset>
+										</copy>
+										<!-- Copy the HTML that uses multiple files -->
+										<copy todir="${project.build.directory}/contents/reference/html" overwrite="true" flatten="true">
+											<fileset dir="${project.build.directory}/generated-docs" includes="*.html" >
+												<include name="*.html" />
+												<exclude name="index.html" />
+												<exclude name="index-multi.html" />
+												<exclude name="writing-advice.html" />
+											</fileset>
+										</copy>
+										<copy file="${project.build.directory}/generated-docs/index-multi.html" tofile="${project.build.directory}/contents/reference/html/index.html" />
+										<copy file="${project.build.directory}/generated-docs/stylesheets/spring.css" tofile="${project.build.directory}/contents/reference/html/stylesheets/spring.css" />
+										<copy todir="${project.build.directory}/contents/reference/html/tocbot-3.0.2" overwrite="true" flatten="true">
+											<fileset dir="${project.build.directory}/generated-docs/tocbot-3.0.2" includes="*.*" >
+												<include name="*.*" />
+											</fileset>
+										</copy>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

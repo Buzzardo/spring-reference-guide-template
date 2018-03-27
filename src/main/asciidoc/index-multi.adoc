@@ -1,0 +1,8 @@
+= Spring {Your Product} Reference Guide
+
+The reference documentation consists of the following sections:
+
+[horizontal]
+link:overview.html[Overview] :: Introducing {Your Product}, Getting Help, and more.
+link:getting-started.html[Getting Started] :: First Steps, System Requirements, Installing {Your Product}, Developing Your First Application, and more.
+// The rest of your chapters here, in the same format
