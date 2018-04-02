@@ -163,6 +163,11 @@
 										<!-- Copy the HTML that uses a single file -->
 										<copy file="${project.build.directory}/generated-docs/index.html" tofile="${project.build.directory}/contents/reference/htmlsingle/index.html" />
 										<copy file="${project.build.directory}/generated-docs/stylesheets/spring.css" tofile="${project.build.directory}/contents/reference/htmlsingle/stylesheets/spring.css" />
+										<copy todir="${project.build.directory}/contents/reference/htmlsingle/images" overwrite="true" flatten="true">
+											<fileset dir="${project.build.directory}/generated-docs/images" includes="*.*" >
+												<include name="*.*" />
+											</fileset>
+										</copy>
 										<copy todir="${project.build.directory}/contents/reference/htmlsingle/tocbot-3.0.2" overwrite="true" flatten="true">
 											<fileset dir="${project.build.directory}/generated-docs/tocbot-3.0.2" includes="*.*" >
 												<include name="*.*" />
@@ -175,6 +180,11 @@
 												<exclude name="index.html" />
 												<exclude name="index-multi.html" />
 												<exclude name="writing-advice.html" />
+											</fileset>
+										</copy>
+										<copy todir="${project.build.directory}/contents/reference/html/images" overwrite="true" flatten="true">
+											<fileset dir="${project.build.directory}/generated-docs/images" includes="*.*" >
+												<include name="*.*" />
 											</fileset>
 										</copy>
 										<copy file="${project.build.directory}/generated-docs/index-multi.html" tofile="${project.build.directory}/contents/reference/html/index.html" />

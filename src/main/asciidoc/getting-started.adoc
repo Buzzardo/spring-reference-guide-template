@@ -1,11 +1,11 @@
 [[getting-started]]
 == Getting Started
 
-Add everything a developer needs to know to start using your product, including:
+Add everything a developer needs to know to start using your project, including:
 
 * System Requirements (if any)
 * Installation instructions (usually how to set it up in Maven, Gradle, or both)
-* The simplest possible application that uses your product
+* The simplest possible application that uses your project
 * A somewhat more complex application that shows a key feature
 
 To help readers find the content they want more quickly, add a list of the headings at the
@@ -23,7 +23,7 @@ is called information mapping.)
 [[getting-started-system-requirements]]
 === System Requirements
 
-If you product requires anything special by way of memory or disk space or other
+If you project requires anything special by way of memory or disk space or other
 infrastructure (including a Cloud Foundry or other cloud instance), describe how to set up
 those bits here.
 
@@ -32,7 +32,7 @@ those bits here.
 [[getting-started-installation]]
 === Installation
 
-Describe how to install your product here. That may be nothing more than how to get it
+Describe how to install your project here. That may be nothing more than how to get it
 into Maven, Gradle, or both. However, it may also include local setup options (perhaps for
 testing) and cloud setup options.
 
@@ -42,7 +42,7 @@ testing) and cloud setup options.
 === A Starter Application
 
 The following example shows the simplest possible application that can be built with {Your
-Product}:
+Project}:
 
 [source,java]
 ----
@@ -58,7 +58,7 @@ Product}:
 // feature you want to showcase in the heading.
 
 The following example shows a more complex application that includes how to {use some key
-feature of Your Product}:
+feature of Your Project}:
 
 [source,java]
 ----

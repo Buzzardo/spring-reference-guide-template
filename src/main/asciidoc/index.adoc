@@ -1,7 +1,8 @@
-= Spring {Your Product} Reference Guide
+= Spring {Your Project} Reference Guide
 
 Author list here (semicolon-separated - the semicolons render as nice separators)
 
+:linkcss:
 :doctype: book
 :docinfo: shared
 :toc: left

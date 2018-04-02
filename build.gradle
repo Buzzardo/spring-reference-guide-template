@@ -1,0 +1,100 @@
+description = 'Spring Your Project'
+
+apply plugin: 'base'
+
+buildscript {
+	repositories {
+		maven { url 'https://repo.spring.io/plugins-release' }
+		maven { url 'https://plugins.gradle.org/m2/' }
+	}
+	dependencies {
+		classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+		classpath 'io.spring.gradle:spring-io-plugin:0.0.5.RELEASE'
+		classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.1"
+		classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.3"
+		classpath "org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15"
+		classpath "org.asciidoctor:asciidoctorj-epub3:1.5.0-alpha.6"
+	}
+}
+
+apply plugin: "org.asciidoctor.convert"
+
+asciidoctor {
+	sourceDir = file('src/main/asciidoc')
+	sources {
+		include '*.adoc'
+	}
+	resources {
+		from(sourceDir) {
+			include 'images/**'
+			include 'stylesheets/**'
+			include 'jsfiles/**'
+			include 'tocbot-3.0.2/**'
+		}
+	}
+	logDocuments = true
+	/*
+	  If you want Epub, use Maven. The Asciidoctor epub plugin for Gradle has a bug that
+		doesn't work with our formatting. See
+		https://github.com/asciidoctor/asciidoctor-epub3/issues/47. In particular, it dislikes
+		inline code within headings, which is part of our standard. There are other issues,
+		too.
+	*/
+	backends = ["html", "pdf"]
+	options doctype: 'book', eruby: 'erubis'
+	attributes = [toc: 'left',
+			linkcss: '',
+			icons: 'font',
+			idprefix: '',
+			idseparator: '-',
+			docinfo: 'shared',
+			revnumber: project.version,
+			sectanchors: '',
+			sectnums: '',
+			'source-highlighter': 'prettify',
+			stylesdir: 'stylesheets/',
+			stylesheet: 'spring.css',
+			'spring-version': project.version,
+			'allow-uri-read': '']
+
+	doLast {
+		// Move the files for the single-file HTML version
+		ant.copy(file: 'build/asciidoc/html/index.html', tofile: 'build/contents/reference/htmlsingle/index.html')
+		ant.copy(todir: 'build/contents/reference/htmlsingle/images') {
+		    fileset(dir: 'build/asciidoc/html/images')
+		}
+		ant.copy(todir: 'build/contents/reference/htmlsingle/tocbot-3.0.2') {
+		    fileset(dir: 'build/asciidoc/html/tocbot-3.0.2')
+		}
+		ant.copy(file: 'build/asciidoc/html/stylesheets/spring.css', tofile: 'build/contents/reference/htmlsingle/stylesheets/spring.css')
+
+		// Move the files for the multi-file HTML version
+		ant.copy(todir: 'build/contents/reference/html') {
+		    fileset(dir: 'build/asciidoc/html')
+		}
+		ant.delete() {
+			fileset(dir: 'build/contents/reference/html') {
+				include(name: 'index.html')
+				include(name: 'index-multi.html')
+				include(name: 'writing-advice.html')
+			}
+		}
+		ant.copy(file: 'build/asciidoc/html/index-multi.html', tofile: 'build/contents/reference/html/index.html')
+		ant.copy(todir: 'build/contents/reference/html/images') {
+		    fileset(dir: 'build/asciidoc/html/images')
+		}
+		ant.copy(todir: 'build/contents/reference/html/tocbot-3.0.2') {
+		    fileset(dir: 'build/asciidoc/html/tocbot-3.0.2')
+		}
+		ant.copy(file: 'build/asciidoc/html/stylesheets/spring.css', tofile: 'build/contents/reference/html/stylesheets/spring.css')
+
+		// Move the PDF file
+		ant.copy(file: 'build/asciidoc/pdf/index.pdf', tofile: 'build/contents/reference/pdf/your-project.pdf')
+	}
+}
+
+task wrapper(type: Wrapper) {
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '3.5'
+}

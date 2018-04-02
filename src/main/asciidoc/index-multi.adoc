@@ -1,4 +1,4 @@
-= Spring {Your Product} Reference Guide
+= Spring {Your Project} Reference Guide
 
 The reference documentation consists of the following sections:
 

@@ -20,6 +20,6 @@ headings.
 
 [[overview-what-to-read-next]]
 === What to Read Next
-You may want to add a "`What to Read Next`" heading if your product is sufficiently
+You may want to add a "`What to Read Next`" heading if your prjeuct is sufficiently
 complex that reading straight through the reference guide does not suit some
 readers.

@@ -1,12 +1,3 @@
-// This file has some of the same attributes as the index file, because it is meant to be
-// a stand-alone file rather than part of a book.
-
-// To build this document such that you get Spring's styles and admonition icons, use the
-// following command: asciidoctor -a stylesheet=stylesheets/spring.css writing-advice.adoc
-
-:source-highlighter: prettify
-:icons: font
-
 = Tips about Writing and Formatting with Asciidoc
 
 This chapter offers some advice on writing about software and some tips for
