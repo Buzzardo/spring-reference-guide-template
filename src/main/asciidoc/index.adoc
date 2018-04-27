@@ -1,19 +1,19 @@
 = Spring {Your Project} Reference Guide
-
-Author list here (semicolon-separated - the semicolons render as nice separators)
-
-:linkcss:
-:doctype: book
+Author Names
 :docinfo: shared
-:toc: left
-:toclevels: 4
-:source-highlighter: prettify
-:icons: font
-:sectnums:
-// Remove :sectnums: if you do not want numbered sections (1.1.1, for example)
-// Other Asciidoc variables (often paths to sample code and Github repositories)
+:imagesdir: images
+ifdef::epub[:front-cover-image: image:epub-cover.png[Front Cover,1050,1600]]
 
-// Put include statements here - use this area to add all your chapters
+// Do not put a blank line in the preceding set of lines. That's the document header, and the Epub generator expects it to not have blank lines. A blank line will break the epub.
+// The rest of the document attributes can go in any order.
+:doctype: book
+:idprefix:
+:idseparator: -
+:stylesdir: stylesheets
+:stylesheet: spring.css
+
+ifdef::epub[:leveloffset: -1]
+
+include::preamble.adoc[]
 include::overview.adoc[]
 include::getting-started.adoc[]
-// And so on

@@ -20,8 +20,29 @@ buildscript {
 
 apply plugin: "org.asciidoctor.convert"
 
+task moveResources {
+	// Get the document resources
+	ant.mkdir(dir: 'build/resources')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/html/docinfo-footer.html', dest: 'build/resources')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/html/docinfo.html', dest: 'build/resources')
+	ant.mkdir(dir: 'build/resources/tocbot-3.0.2')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/javascript/tocbot-3.0.2/styles.css', dest: 'build/resources/tocbot-3.0.2')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/javascript/tocbot-3.0.2/tocbot.css', dest: 'build/resources/tocbot-3.0.2')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/javascript/tocbot-3.0.2/tocbot.js', dest: 'build/resources/tocbot-3.0.2')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/javascript/tocbot-3.0.2/tocbot.min.js', dest: 'build/resources/tocbot-3.0.2')
+	ant.mkdir(dir: 'build/resources/stylesheets')
+	ant.get(src: 'https://cdn.rawgit.com/spring-projects/spring-doc-resources/b75df1d0/src/main/resources/stylesheets/spring.css', dest: 'build/resources/stylesheets/spring.css')
+
+	ant.copy(todir: 'build/working/') {
+		fileset(dir: 'src/main/asciidoc')
+	}
+	ant.copy(todir: 'build/working/') {
+		fileset(dir: 'build/resources')
+	}
+}
+
 asciidoctor {
-	sourceDir = file('src/main/asciidoc')
+	sourceDir = file('build/working')
 	sources {
 		include '*.adoc'
 	}
@@ -49,13 +70,11 @@ asciidoctor {
 			idprefix: '',
 			idseparator: '-',
 			docinfo: 'shared',
-			revnumber: project.version,
 			sectanchors: '',
 			sectnums: '',
 			'source-highlighter': 'prettify',
 			stylesdir: 'stylesheets/',
 			stylesheet: 'spring.css',
-			'spring-version': project.version,
 			'allow-uri-read': '']
 
 	doLast {
@@ -65,13 +84,15 @@ asciidoctor {
 		    fileset(dir: 'build/asciidoc/html/images')
 		}
 		ant.copy(todir: 'build/contents/reference/htmlsingle/tocbot-3.0.2') {
-		    fileset(dir: 'build/asciidoc/html/tocbot-3.0.2')
+		    fileset(dir: 'build/resources/tocbot-3.0.2')
 		}
-		ant.copy(file: 'build/asciidoc/html/stylesheets/spring.css', tofile: 'build/contents/reference/htmlsingle/stylesheets/spring.css')
+		ant.copy(file: 'build/resources/stylesheets/spring.css', tofile: 'build/contents/reference/htmlsingle/stylesheets/spring.css')
+		ant.copy(file: 'build/resources/docinfo.html', tofile: 'build/contents/reference/htmlsingle/docinfo.html')
+		ant.copy(file: 'build/resources/docinfo-footer.html', tofile: 'build/contents/reference/htmlsingle/docinfo-footer.html')
 
 		// Move the files for the multi-file HTML version
 		ant.copy(todir: 'build/contents/reference/html') {
-		    fileset(dir: 'build/asciidoc/html')
+			fileset(dir: 'build/asciidoc/html')
 		}
 		ant.delete() {
 			fileset(dir: 'build/contents/reference/html') {
@@ -82,12 +103,14 @@ asciidoctor {
 		}
 		ant.copy(file: 'build/asciidoc/html/index-multi.html', tofile: 'build/contents/reference/html/index.html')
 		ant.copy(todir: 'build/contents/reference/html/images') {
-		    fileset(dir: 'build/asciidoc/html/images')
+			fileset(dir: 'build/asciidoc/html/images')
 		}
 		ant.copy(todir: 'build/contents/reference/html/tocbot-3.0.2') {
-		    fileset(dir: 'build/asciidoc/html/tocbot-3.0.2')
+			fileset(dir: 'build/resources/tocbot-3.0.2')
 		}
-		ant.copy(file: 'build/asciidoc/html/stylesheets/spring.css', tofile: 'build/contents/reference/html/stylesheets/spring.css')
+		ant.copy(file: 'build/resources/stylesheets/spring.css', tofile: 'build/contents/reference/html/stylesheets/spring.css')
+		ant.copy(file: 'build/resources/docinfo.html', tofile: 'build/contents/reference/html/docinfo.html')
+		ant.copy(file: 'build/resources/docinfo-footer.html', tofile: 'build/contents/reference/html/docinfo-footer.html')
 
 		// Move the PDF file
 		ant.copy(file: 'build/asciidoc/pdf/index.pdf', tofile: 'build/contents/reference/pdf/your-project.pdf')
